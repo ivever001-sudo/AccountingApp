@@ -75,8 +75,8 @@ fun AddTransactionScreen(
     viewModel: AddTransactionViewModel = viewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
+    val allCategories by viewModel.allCategories.collectAsState()
     val context = LocalContext.current
-
     LaunchedEffect(state.saved) {
         if (state.saved) {
             Toast.makeText(context, "保存成功", Toast.LENGTH_SHORT).show()
@@ -128,7 +128,7 @@ fun AddTransactionScreen(
                 style = MaterialTheme.typography.titleMedium
             )
             CategoryGrid(
-                categories = state.categories,
+                categories = allCategories.filter { it.type == state.type },
                 selectedId = state.selectedCategoryId,
                 onSelect = { viewModel.selectCategory(it) }
             )
