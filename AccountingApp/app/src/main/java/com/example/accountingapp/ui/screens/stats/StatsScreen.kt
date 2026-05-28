@@ -256,7 +256,7 @@ private fun DonutChart(
         var startAngle = -90f
 
         stats.forEachIndexed { index, stat ->
-            val sweep = (stat.total / total) * 360f
+            val sweep = (stat.total.toFloat() / total) * 360
             val color = ChartColors[index % ChartColors.size]
 
             drawArc(
